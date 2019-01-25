@@ -21,6 +21,15 @@
         </activity>
         <activity android:name=".Activities.NewContactActivity">
         </activity>
+
+        <receiver
+                android:name=".Logic.MailReceiver"
+                android:enabled="true"
+                android:exported="true">
+        </receiver>
+
+        <activity android:name=".Activities.MailActivity">
+        </activity>
     </application>
 
 </manifest>

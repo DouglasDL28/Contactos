@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.douglasdeleon.contactos.App
+import com.example.douglasdeleon.contactos.Logic.MailReceiver
 import com.example.douglasdeleon.contactos.R
 import kotlinx.android.synthetic.main.activity_contact.*
+import android.widget.Toast
+
+
 
 class ContactActivity : AppCompatActivity() {
 
@@ -30,6 +34,19 @@ class ContactActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        mail_textview.setOnClickListener{
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "message/rfc822"
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(mail_textview.text.toString()))
+            intent.putExtra(Intent.EXTRA_TEXT, "mi nombre es ${name_textview.text} y mi número es ${number_textview.text}")
+            try {
+                startActivity(Intent.createChooser(intent, "Send mail..."))
+            } catch (ex: android.content.ActivityNotFoundException) {
+                Toast.makeText(this@ContactActivity, ":(", Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
     }
 
